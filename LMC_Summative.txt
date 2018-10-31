@@ -54,6 +54,7 @@ times	LDA	counter
 	LDA	hold
 	ADD	posit
 	STO	hold
+	BRZ	error
 	BR	times
 up_posi	LDA	hold
 	STO	posit
@@ -103,6 +104,8 @@ posit	DAT	001
 inter	DAT	000
 hold	DAT	000
 step	DAT	001
+
+
 
 
 
