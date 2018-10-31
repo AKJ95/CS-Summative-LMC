@@ -23,7 +23,6 @@
 	BRP	error
 # Convert to base 10
 divide	LDA	num
-	BRZ	result
 	SUB	ten
 	BRP	pos
 	BR	check_d
@@ -48,6 +47,7 @@ b_ten	LDA	num
 
 finish	STO	counter
 	LDA	q
+	BRZ	change
 	STO	num
 	LDA	counter
 	STO	q
@@ -67,10 +67,30 @@ up_posi	STO	counter
 	LDA	counter
 	STO	q
 	BR	divide
+
+# Commence second round
+change	LDA	step
+	SUB	one
+	BRZ	result
+	ADD	one
+	ADD	one
+	STO	step
+	LDA	inter
+	STO	num
+	LDA	ten
+	STO	base_a
+	LDA	base_b
+	STO	ten
+	LDA	zero
+	STO	inter
+	LDA	one
+	STO	posit
+	BR	divide
 	
 # Display error message
 error	LDA	msg
 	BR	end
+
 # Display result
 result	LDA	inter
 end	OUT
@@ -80,6 +100,7 @@ num	DAT
 base_a	DAT
 base_b	DAT
 msg	DAT	999
+zero	DAT	000
 one	DAT	001
 ten	DAT	010
 eleven	DAT	011
@@ -87,19 +108,7 @@ q	DAT	000
 counter	DAT	000
 posit	DAT	001	
 inter	DAT	000
-
-
-
-
-
-
-
-
-
-
-
-
-
+step	DAT	000
 
 
 
