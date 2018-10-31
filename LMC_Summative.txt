@@ -29,14 +29,12 @@ divide	LDA	num
 	SUB	base_a
 	BRP	error
 b_ten	LDA	num
-	SUB	counter
 	BRZ	finish
+	SUB	one
+	STO	num
 	LDA	inter
 	ADD	posit
 	STO	inter
-	LDA	counter
-	ADD	one
-	STO	counter
 	BR	b_ten
 pos	STO	num
 	LDA	q
@@ -106,6 +104,9 @@ posit	DAT	001
 inter	DAT	000
 hold	DAT	000
 step	DAT	001
+
+
+
 
 
 
