@@ -1,0 +1,103 @@
+# Enter assembler code here
+#
+# To add comments begin lines with #
+# Code lines have 3 entries separated by tabs
+# > First an optional label,
+# > second an instruction mnemonic, and 
+# > third an address label if required.
+#
+# Valid mnemonics are:
+# HLT, ADD, SUB, STO, LDA,
+# BR, BRZ, BRP, IN, OUT, DAT
+
+# Get inputs; check if bases > 0 and < 11.
+	IN
+	STO	num
+	IN
+	STO	base_a
+	BRZ	error
+	SUB	eleven
+	BRP	error
+	IN
+	STO	base_b
+	BRZ	error
+	SUB	eleven
+	BRP	error
+# Convert to base 10
+divide	LDA	num
+	BRZ	result
+	SUB	ten
+	BRP	pos
+	BR	check_d
+pos	STO	num
+	LDA	q
+	ADD	one
+	STO	q
+	BR	divide
+check_d	LDA	num
+	SUB	base_a
+	BRP	error
+b_ten	LDA	num
+	SUB	counter
+	BRZ	finish
+	LDA	inter
+	ADD	posit
+	STO	inter
+	LDA	counter
+	ADD	one
+	STO	counter
+	BR	b_ten
+
+finish	STO	counter
+	STO	hold
+	LDA	q
+	STO	num
+	LDA	counter
+	STO	q
+times	LDA	base_a
+	SUB	counter
+	BRZ	up_posi
+	LDA	hold
+	ADD	posit
+	STO	hold
+	LDA	counter
+	ADD	one
+	STO	counter
+	BR	times
+up_posi	STO	counter
+	LDA	hold
+	STO	posit
+	BR	divide
+	
+
+# Display error message
+error	LDA	msg
+	BR	end
+
+result	LDA	inter
+end	OUT
+# End of program
+	HLT
+
+num	DAT
+base_a	DAT
+base_b	DAT
+msg	DAT	999
+one	DAT	001
+ten	DAT	010
+eleven	DAT	011
+q	DAT	000
+counter	DAT	000
+posit	DAT	001	
+inter	DAT	000
+hold	DAT
+
+
+
+
+
+
+
+
+
+
