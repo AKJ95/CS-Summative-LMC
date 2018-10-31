@@ -47,7 +47,6 @@ b_ten	LDA	num
 	BR	b_ten
 
 finish	STO	counter
-	STO	hold
 	LDA	q
 	STO	num
 	LDA	counter
@@ -55,16 +54,18 @@ finish	STO	counter
 times	LDA	base_a
 	SUB	counter
 	BRZ	up_posi
-	LDA	hold
+	LDA	q
 	ADD	posit
-	STO	hold
+	STO	q
 	LDA	counter
 	ADD	one
 	STO	counter
 	BR	times
 up_posi	STO	counter
-	LDA	hold
+	LDA	q
 	STO	posit
+	LDA	counter
+	STO	q
 	BR	divide
 	
 # Display error message
@@ -86,7 +87,8 @@ q	DAT	000
 counter	DAT	000
 posit	DAT	001	
 inter	DAT	000
-hold	DAT
+
+
 
 
 
