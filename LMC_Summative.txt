@@ -25,13 +25,7 @@
 divide	LDA	num
 	SUB	ten
 	BRP	pos
-	BR	check_d
-pos	STO	num
-	LDA	q
-	ADD	one
-	STO	q
-	BR	divide
-check_d	LDA	num
+	LDA	num
 	SUB	base_a
 	BRP	error
 b_ten	LDA	num
@@ -44,36 +38,38 @@ b_ten	LDA	num
 	ADD	one
 	STO	counter
 	BR	b_ten
+pos	STO	num
+	LDA	q
+	ADD	one
+	STO	q
+	BR	divide
 
 finish	STO	counter
 	LDA	q
 	BRZ	change
 	STO	num
-	LDA	counter
-	STO	q
 times	LDA	base_a
 	SUB	counter
 	BRZ	up_posi
-	LDA	q
+	LDA	hold
 	ADD	posit
-	STO	q
+	STO	hold
 	LDA	counter
 	ADD	one
 	STO	counter
 	BR	times
-up_posi	STO	counter
-	LDA	q
+up_posi	LDA	hold
 	STO	posit
-	LDA	counter
+	LDA	zero
+	STO	counter
 	STO	q
+	STO	hold
 	BR	divide
 
 # Commence second round
 change	LDA	step
-	SUB	one
 	BRZ	result
-	ADD	one
-	ADD	one
+	SUB	one
 	STO	step
 	LDA	inter
 	STO	num
@@ -108,7 +104,13 @@ q	DAT	000
 counter	DAT	000
 posit	DAT	001	
 inter	DAT	000
-step	DAT	000
+hold	DAT	000
+step	DAT	001
+
+
+
+
+
 
 
 
