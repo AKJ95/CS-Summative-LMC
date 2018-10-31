@@ -42,19 +42,18 @@ pos	STO	num
 	STO	q
 	BR	divide
 
-finish	STO	counter
-	LDA	q
+finish	LDA	q
 	BRZ	change
 	STO	num
-times	LDA	base_a
-	SUB	counter
+	LDA	base_a
+	STO	counter
+times	LDA	counter
 	BRZ	up_posi
+	SUB	one
+	STO	counter
 	LDA	hold
 	ADD	posit
 	STO	hold
-	LDA	counter
-	ADD	one
-	STO	counter
 	BR	times
 up_posi	LDA	hold
 	STO	posit
@@ -104,6 +103,8 @@ posit	DAT	001
 inter	DAT	000
 hold	DAT	000
 step	DAT	001
+
+
 
 
 
