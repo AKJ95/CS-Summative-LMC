@@ -10,6 +10,15 @@
 # HLT, ADD, SUB, STO, LDA,
 # BR, BRZ, BRP, IN, OUT, DAT
 
+# Variable Initialisation
+	LDA	zero
+	STO	q
+	STO	inter
+	STO	hold
+	LDA	one
+	STO	posit
+	STO	step
+	
 # Get inputs; check if bases > 0 and < 11.
 	IN
 	STO	num
@@ -104,6 +113,9 @@ posit	DAT	001
 inter	DAT	000
 hold	DAT	000
 step	DAT	001
+
+
+
 
 
 
