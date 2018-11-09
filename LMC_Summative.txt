@@ -18,8 +18,11 @@
 	LDA	one
 	STO	posit
 	STO	step
+	LDA	eleven
+	SUB	one
+	STO	ten
 	
-# Get inputs; check if bases > 0 and < 11.
+# Get inputs; check if bases are < 11.
 	IN
 	STO	num
 	IN
@@ -30,13 +33,26 @@
 	STO	base_b
 	SUB	eleven
 	BRP	error
-# Convert to base 10
+
+# Extract the last digit of the number by finding number mod the base to which they are converted:
+# First loop: number mod 10
+# Second loop: number mod base_b
 divide	LDA	num
 	SUB	ten
 	BRP	pos
+
+# Check if the digit exceeds the base it is in now.
+# E.g. 2 isn't supposed to appear in a binary number. If such thing is detected an error is returned.
 	LDA	num
 	SUB	base_a
 	BRP	error
+
+
+# Multiply the digit extracted by the value of base^position
+# in the base from which they are converted
+
+# First loop: Multiplying by base_a^position
+# Second loop: Multiplying by 10^position
 b_ten	LDA	num
 	BRZ	finish
 	SUB	one
@@ -45,17 +61,24 @@ b_ten	LDA	num
 	ADD	posit
 	STO	inter
 	BR	b_ten
+
+# Increment the quotient by one and continue modding.
 pos	STO	num
 	LDA	q
 	ADD	one
 	STO	q
 	BR	divide
 
+# After the last digit is extracted and added, repeat the same procedure on the quotient to extract the next number until there is none left.
 finish	LDA	q
 	BRZ	change
 	STO	num
 	LDA	base_a
 	STO	counter
+
+# Also, update the position value by one position
+# Round 1: move along position values 1, base_a, base_a^2...
+# Round 2: move along position values 1, 10, 100...
 times	LDA	counter
 	BRZ	up_posi
 	SUB	one
@@ -63,8 +86,12 @@ times	LDA	counter
 	LDA	hold
 	ADD	posit
 	STO	hold
+
+# Overflow error checker: if the program attempts to move from 100 to 1000, it means there is an overflow. Since 100 * 10 will result in 000, a BRZ will detect this error and return the error message.
 	BRZ	error
 	BR	times
+
+# Reset variables so it's ready for the next round of extraction and multiplication
 up_posi	LDA	hold
 	STO	posit
 	LDA	zero
@@ -73,7 +100,7 @@ up_posi	LDA	hold
 	STO	hold
 	BR	divide
 
-# Commence second round
+# Commence second loop.
 change	LDA	step
 	BRZ	result
 	SUB	one
@@ -113,21 +140,3 @@ posit	DAT	001
 inter	DAT	000
 hold	DAT	000
 step	DAT	001
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
