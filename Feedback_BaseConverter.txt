@@ -1,0 +1,60 @@
+Feedback for LMC file: BaseConverter.txt
+
+
+Attempting to compile: Compile successful. 91 mailboxes used.
+
+
+Attempting to run test 1: Into base 10
+    Inputs: 321, 004, 010
+  Expected: 57
+    Output: 57
+  Halted after 755 Fetch/execute cycles.
+
+Attempting to run test 2: Into base 10
+    Inputs: 123, 005, 010
+  Expected: 38
+    Output: 38
+  Halted after 573 Fetch/execute cycles.
+
+Attempting to run test 3: Into base 10
+    Inputs: 011, 002, 010
+  Expected: 3
+    Output: 3
+  Halted after 151 Fetch/execute cycles.
+
+Attempting to run test 4: Out of base 10
+    Inputs: 123, 010, 005
+  Expected: 443
+    Output: 443
+  Halted after 975 Fetch/execute cycles.
+
+Attempting to run test 5: Out of base 10
+    Inputs: 006, 010, 002
+  Expected: 110
+    Output: 110
+  Halted after 383 Fetch/execute cycles.
+
+Attempting to run test 6: Between Bases
+    Inputs: 461, 008, 007
+  Expected: 614
+    Output: 614
+  Halted after 1443 Fetch/execute cycles.
+
+Attempting to run test 7: Between Bases
+    Inputs: 011, 002, 004
+  Expected: 3
+    Output: 3
+  Halted after 151 Fetch/execute cycles.
+
+Attempting to run test 8: Into base 10
+    Inputs: 123, 005, 007
+  Expected: 53
+    Output: 53
+  Halted after 565 Fetch/execute cycles.
+
+Attempting to run test 9: Overflow
+    Inputs: 999, 010, 009
+  Expected: 999
+    Output: 999
+  Halted after 2722 Fetch/execute cycles.
+

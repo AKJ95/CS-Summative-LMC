@@ -11,16 +11,7 @@
 # BR, BRZ, BRP, IN, OUT, DAT
 
 # Variable Initialisation
-	LDA	zero
-	STO	q
-	STO	inter
-	STO	hold
-	LDA	one
-	STO	posit
-	STO	step
-	LDA	eleven
-	SUB	one
-	STO	ten
+
 	
 # Get inputs; check if bases are < 11.
 	IN
@@ -33,6 +24,19 @@
 	STO	base_b
 	SUB	eleven
 	BRP	error
+
+	
+	LDA	one
+	STO	step
+	LDA	eleven
+	SUB	one
+	STO	ten
+init	LDA	zero
+	STO	q
+	STO	inter
+	STO	hold
+	LDA	one
+	STO	posit
 
 # Extract the last digit of the number by finding number mod the base to which they are converted:
 # First loop: number mod 10
@@ -111,11 +115,7 @@ change	LDA	step
 	STO	base_a
 	LDA	base_b
 	STO	ten
-	LDA	zero
-	STO	inter
-	LDA	one
-	STO	posit
-	BR	divide
+	BR	init
 	
 # Display error message
 error	LDA	msg
@@ -140,3 +140,6 @@ posit	DAT	001
 inter	DAT	000
 hold	DAT	000
 step	DAT	001
+
+
+
